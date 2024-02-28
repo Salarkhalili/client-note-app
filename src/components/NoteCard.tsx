@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { Card, Text, CardHeader, CardBody } from "@chakra-ui/react";
 
 interface props {
@@ -6,8 +5,6 @@ interface props {
   content: string;
 }
 const NoteCard = ({ title, content }: props) => {
-  // اینجا باید مشخص کنی هر نوت چه شکلیه و نمایشش بدی
-
   return (
     <Card>
       <CardHeader>
