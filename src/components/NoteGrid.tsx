@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import axios, { CanceledError } from "axios";
 import NoteCard from "./NoteCard";
-import { GridItem, Grid, Box } from "@chakra-ui/react";
+import { GridItem, Grid, Box, Text, Spinner } from "@chakra-ui/react";
 interface Note {
   _id: string;
   title: string;
@@ -15,13 +15,31 @@ const NoteGrid: React.FC = () => {
   // اینجا باید استیت و یوز افکت استفاده کنی که نوت ها رو از ای پی ای بگیری و بریز تو نوتس و پایین استفاده کنی
 
   const [notes, setNotes] = useState<Note[]>([]);
+  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
-    axios.get<axiosGet>("https://amir1.liara.run/api/v1/notes").then((res) => {
-      setNotes(res.data.notes);
-    });
+    const controller = new AbortController();
+    setIsLoading(true);
+
+    axios
+      .get<axiosGet>("https://amir1.liara.run/api/v1/dnotes", {
+        signal: controller.signal,
+      })
+      .then((res) => {
+        setNotes(res.data.notes);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        if (err instanceof CanceledError) return;
+        setError(err.message);
+        setIsLoading(false);
+      });
+    return () => controller.abort();
   }, []);
   return (
     <>
+      {error && <Text color="tomato">{error}</Text>}
+      {isLoading && <Spinner />}
       <Grid templateColumns="repeat(auto-fill, minmax(300px, 1fr))" gap={6}>
         {notes.map((note) => (
           <GridItem key={note._id}>
