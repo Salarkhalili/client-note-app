@@ -1,8 +1,11 @@
-const addNoteHook = () => {
-  const addNote = () => {
-    console.log("sssssssssssss");
-  };
-  return { addNote };
-};
+// const addNoteHook = () => {
+//   const addNote = () => {
+//     console.log("sssssssssssss");
+//   };
+//   return { addNote };
+// };
 
-export default addNoteHook;
+// export default addNoteHook;
+
+
+//اینو نمیخواد فعلا انجام بدی 

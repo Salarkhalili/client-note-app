@@ -1,9 +1,9 @@
-import AddNoteForm from "./components/AddNoteForm";
-import addNoteHook from "./hooks/addNoteHook";
+import NoteGrid from './components/NoteGrid';
+
 const App = () => {
   return (
     <div>
-      <AddNoteForm />
+      <NoteGrid />
     </div>
   );
 };
