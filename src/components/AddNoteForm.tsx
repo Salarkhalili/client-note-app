@@ -1,35 +1,46 @@
-// import { useState } from "react";
+import {
+  Box,
+  Button,
+  Card,
+  FormControl,
+  FormLabel,
+  Input,
+  Textarea,
+} from "@chakra-ui/react";
+import axios from "axios";
+import { useState } from "react";
+interface Note {
+  title: string;
+  content: string;
+}
 
-// import addNoteHook from "../hooks/addNoteHook";
+const AddNoteForm = () => {
+  const [newNote, setNewNote] = useState<Note[]>([]);
 
-// import { Alert, Box, Button, Input, Textarea } from "@chakra-ui/react";
-// const AddNoteForm = () => {
-//   const [title, setTitle] = useState("");
-//   const [content, setContent] = useState("");
+  const addNewNote = () => {
+    const newInputNote = { title: "عنوان تست", content: "متن تست" };
+    setNewNote([newInputNote]);
 
-//   const handleAddNote = () => {
-//     addNote();
-//   };
+    axios.post("https://amir1.liara.run/api/v1/notes", newNote);
+  };
 
-//   return (
-//     <Box>
-//       <Input
-//         type="text"
-//         placeholder="عنوان یادداشت"
-//         value={title}
-//         onChange={(e) => setTitle(e.target.value)}
-//       />
-//       <Textarea
-//         placeholder="متن یادداشت"
-//         value={content}
-//         onChange={(e) => setContent(e.target.value)}
-//         mt="4"
-//       />
-//       <Button colorScheme="blue" mt="4" onClick={handleAddNote}>
-//         افزودن یادداشت
-//       </Button>
-//     </Box>
-//   );
-// };
+  return (
+    <Box>
+      <Card p={4} align="center">
+        <FormControl mb={6}>
+          <FormLabel>عنوان </FormLabel>
+          <Input placeholder="عنوان من" />
+        </FormControl>
+        <FormControl>
+          <FormLabel>متن </FormLabel>
+          <Textarea resize={"none"} placeholder="متن من ..." />
+        </FormControl>
+        <Button mt={6} colorScheme="blue" onClick={addNewNote}>
+          ثبت
+        </Button>
+      </Card>
+    </Box>
+  );
+};
 
-// export default AddNoteForm;
+export default AddNoteForm;

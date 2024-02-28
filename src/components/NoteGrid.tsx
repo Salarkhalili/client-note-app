@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios, { CanceledError } from "axios";
 import NoteCard from "./NoteCard";
+import AddNoteForm from "./AddNoteForm";
 import {
   GridItem,
   Grid,
@@ -10,7 +11,6 @@ import {
   Button,
   Flex,
 } from "@chakra-ui/react";
-import AddNoteForm from "./AddNoteForm";
 interface Note {
   _id: string;
   title: string;
