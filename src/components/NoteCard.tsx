@@ -1,9 +1,23 @@
-import React from 'react';
+import React, { useState } from "react";
+import { Card, Text, CardHeader, CardBody } from "@chakra-ui/react";
 
-const NoteCard = () => {
+interface props {
+  title: string;
+  content: string;
+}
+const NoteCard = ({ title, content }: props) => {
+  // اینجا باید مشخص کنی هر نوت چه شکلیه و نمایشش بدی
 
-  // اینجا باید مشخص کنی هر نوت چه شکلیه و نمایشش بدی 
-  return <div>NoteCard</div>;
+  return (
+    <Card>
+      <CardHeader>
+        {title}
+        <CardBody>
+          <Text>{content}</Text>
+        </CardBody>
+      </CardHeader>
+    </Card>
+  );
 };
 
 export default NoteCard;

@@ -1,4 +1,4 @@
-import NoteGrid from './components/NoteGrid';
+import NoteGrid from "./components/NoteGrid";
 
 const App = () => {
   return (
