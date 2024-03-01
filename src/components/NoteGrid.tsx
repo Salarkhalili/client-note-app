@@ -3,6 +3,7 @@ import axios, { CanceledError } from "axios";
 import NoteCard from "./NoteCard";
 import { GridItem, Grid, Box, Text, Spinner } from "@chakra-ui/react";
 import DeleteNote from "./DeleteNote";
+import AddNoteForm from "./AddNoteForm";
 export interface Note {
   _id: string;
   title: string;
@@ -44,7 +45,7 @@ const NoteGrid: React.FC = () => {
     <>
       {error && <Text color="tomato">{error}</Text>}
       {isLoading && <Spinner />}
-
+      <AddNoteForm />
       <Grid templateColumns="repeat(auto-fill, minmax(300px, 1fr))" gap={6}>
         {notes.map((note) => (
           <GridItem key={note._id}>
