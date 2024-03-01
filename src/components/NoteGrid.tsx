@@ -1,17 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios, { CanceledError } from "axios";
 import NoteCard from "./NoteCard";
+import { GridItem, Grid, Box, Text, Spinner } from "@chakra-ui/react";
+import DeleteNote from "./DeleteNote";
 import AddNoteForm from "./AddNoteForm";
-import {
-  GridItem,
-  Grid,
-  Box,
-  Text,
-  Spinner,
-  Button,
-  Flex,
-} from "@chakra-ui/react";
-interface Note {
+export interface Note {
   _id: string;
   title: string;
   content: string;
@@ -24,10 +17,7 @@ const NoteGrid: React.FC = () => {
   const [notes, setNotes] = useState<Note[]>([]);
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [visibleForm, setVisibleForm] = useState(false);
-  const handleAddNewCars = () => {
-    setVisibleForm(!visibleForm);
-  };
+
   useEffect(() => {
     const controller = new AbortController();
     setIsLoading(true);
@@ -47,6 +37,10 @@ const NoteGrid: React.FC = () => {
       });
     return () => controller.abort();
   }, []);
+  const DeleteChosenNote = (note: Note) => {
+    setNotes(notes.filter((e) => e._id !== note._id));
+  };
+
   return (
     <>
       {error && <Text color="tomato">{error}</Text>}
@@ -55,21 +49,14 @@ const NoteGrid: React.FC = () => {
         {notes.map((note) => (
           <GridItem key={note._id}>
             <Box m="auto" p="10">
-              <NoteCard title={note.title} content={note.content} />
+              <NoteCard title={note.title} content={note.content}>
+                <DeleteNote handleDelete={() => DeleteChosenNote(note)} />
+              </NoteCard>
             </Box>
           </GridItem>
         ))}
       </Grid>
-      <Flex justifyContent="center" py={6} mb={2}>
-        <Button width="30%" colorScheme="blue" onClick={handleAddNewCars}>
-          {visibleForm ? "منصرف شدن" : " افزودن یادداشت جدید"}
-        </Button>
-      </Flex>
-      {visibleForm && (
-        <Box display="flex" justifyContent="center" py={6} mb={2}>
-          <AddNoteForm />
-        </Box>
-      )}
+      <AddNoteForm />
     </>
   );
 };

@@ -1,10 +1,12 @@
 import { Card, Text, CardHeader, CardBody } from "@chakra-ui/react";
+import { ReactNode } from "react";
 
 interface props {
   title: string;
   content: string;
+  children: ReactNode;
 }
-const NoteCard = ({ title, content }: props) => {
+const NoteCard = ({ title, content, children }: props) => {
   return (
     <Card>
       <CardHeader>
@@ -13,6 +15,7 @@ const NoteCard = ({ title, content }: props) => {
           <Text>{content}</Text>
         </CardBody>
       </CardHeader>
+      {children}
     </Card>
   );
 };
