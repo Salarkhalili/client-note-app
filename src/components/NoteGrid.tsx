@@ -6,11 +6,17 @@ import useGetNote, { Note } from "../hooks/useGetNote";
 import axios from "axios";
 
 const NoteGrid: React.FC = () => {
-  const { error, notes, isLoading, setNotes } = useGetNote();
+  const { error, notes, isLoading, setNotes, setError } = useGetNote();
 
   const DeleteChosenNote = (note: Note): void => {
+    const originalNotes = [...notes];
     setNotes(notes.filter((e) => e._id !== note._id));
-    axios.delete("https://amir1.liara.run/api/v1/notes" + note._id);
+    axios
+      .delete("https://amir1.liara.run/api/v1/notes" + note._id)
+      .catch((err) => {
+        setError(err["message"]);
+        setNotes(originalNotes); //چنانچه خطایی در حذف المان رخ داد دوباره باید لیست ر وبه همون حالت قبل نگه داره
+      });
   };
 
   return (

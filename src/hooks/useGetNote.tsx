@@ -34,7 +34,7 @@ const useGetNote = () => {
     return () => controller.abort();
   }, []);
 
-  return { notes, error, isLoading, setNotes };
+  return { notes, error, isLoading, setNotes, setError };
 };
 
 export default useGetNote;
