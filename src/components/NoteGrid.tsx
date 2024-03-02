@@ -17,7 +17,9 @@ const NoteGrid: React.FC = () => {
     <>
       {error && <Text color="tomato">{error}</Text>}
       {isLoading && <Spinner />}
-      <AddNoteForm />
+      <AddNoteForm
+        onSubmit={(newNote) => setNotes([...notes, { ...newNote, _id: "0" }])}
+      />
       <Grid templateColumns="repeat(auto-fill, minmax(300px, 1fr))" gap={6}>
         {notes.map((note) => (
           <GridItem key={note._id}>

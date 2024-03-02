@@ -11,8 +11,8 @@ interface axiosGet {
 }
 const useGetNote = () => {
   const [notes, setNotes] = useState<Note[]>([]);
-  const [error, setError] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
     const controller = new AbortController();
